@@ -1,0 +1,18 @@
+<table class="w3-table w3-striped">
+    <w3-table>
+        <tr>
+            <th>Nomor</th>
+            <th>Item Pemasukan</th>
+            <th>Jumlah</th>
+            <th></th>
+        </tr>
+            {{range $m, $n := .}}
+                <tr>
+                    <td>{{inc $m}}</td>
+                    <td>{{$n.NamaItem}}</td>
+                    <td class="w3-right-align">{{rpi $n.Pemasukan}}</td>
+                    <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deleteIncomeBut.call(this)">Hapus</button></td>
+                </tr>
+            {{end}}
+    </w3-table>
+</table>

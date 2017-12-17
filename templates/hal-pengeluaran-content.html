@@ -1,0 +1,66 @@
+{{define "pengeluaran-content"}}
+<div class="w3-card-2">
+    <div class="w3-container w3-indigo w3-center">
+        <h2>Total Pengeluaran</h2>
+    </div>
+    <div class="w3-container w3-center w3-light-blue">
+        <h3 id="total-pengeluaran">{{rp .TotalPengeluaran}}</h3>
+    </div>
+</div>
+<br>
+<div class="w3-card">
+    <table class="w3-table w3-striped">
+        <w3-table>
+            <tr>
+                <th>Nomor</th>
+                <th>Nama Item</th>
+                <th>Jumlah</th>
+                <th></th>
+            </tr>
+            {{with .DaftarPengeluaran}}
+                {{range $m, $n := .}}
+                    <tr class="table-item-pengeluaran">
+                        <td>{{inc $m}}</td>
+                        <td>{{$n.NamaItem}}</td>
+                        <td class="w3-right-align">{{rpi $n.Pengeluaran}}</td>
+                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deletePemasukanBut.call(this)">Hapus</button></td>
+                    </tr>
+                {{end}}
+            {{end}}
+        </w3-table>
+    </table>
+</div>
+{{end}}
+
+<div class="w3-card-2">
+    <div class="w3-container w3-indigo w3-center">
+        <h2>Total Pengeluaran</h2>
+    </div>
+    <div class="w3-container w3-center w3-light-blue">
+        <h3 id="total-pengeluaran">{{rp .TotalPengeluaran}}</h3>
+    </div>
+</div>
+<br>
+<div class="w3-card">
+    <table class="w3-table w3-striped">
+        <w3-table>
+            <tr>
+                <th>Nomor</th>
+                <th>Nama Item</th>
+                <th>Jumlah</th>
+                <th></th>
+            </tr>
+            {{with .DaftarPengeluaran}}
+                {{range $m, $n := .}}
+                    <tr class="table-item-pengeluaran">
+                        <td>{{inc $m}}</td>
+                        <td>{{$n.NamaItem}}</td>
+                        <td class="w3-right-align">{{rpi $n.Pengeluaran}}</td>
+                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deletePemasukanBut.call(this)">Hapus</button></td>
+                    </tr>
+                {{end}}
+            {{end}}
+        </w3-table>
+    </table>
+</div>
+

@@ -1,0 +1,19 @@
+{{define "pengeluaran-navbar"}}
+<div class="w3-row">
+    <div class="w3-bar w3-teal w3-card">
+        <a href="#" class="w3-bar-item w3-button w3-mobile bulan-ini" id="pengeluaran-tombol-bulan-ini" onclick="pagePengeluaranRefresh()">Bulan Ini</a>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button">Bulan Sebelumnya</button>
+            <div class="w3-dropdown-content w3-bar-block w3-border">
+                {{with .DaftarKursor}}
+                    {{range $k, $l := .}}
+                        <a href="#" class="w3-bar-item w3-button list-bulan-pengeluaran" data-link-kursor="{{$l.Link}}" onclick="getPerbulan.call(this)">{{$l.Point}}</a>
+                    {{end}}
+                {{end}}
+                
+            </div>
+        </div>
+        <!-- <a href="" class="w3-bar-item w3-button w3-mobil bulan-ini">Bulan Sebelumnya</a> -->
+    </div>
+</div>
+{{end}}

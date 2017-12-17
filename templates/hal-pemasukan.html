@@ -1,0 +1,49 @@
+<!-- <h3>This is pemasukan</h3> -->
+<div class="w3-card">
+<select name="bulan" id="pemasukan-bulan" class="w3-select" onchange="getPemasukanBulan()">
+    <option class="disabled selected" value="">Pilih Bulan...</option>
+    {{with .DaftarKursor}}
+        {{range $m, $n := .}}
+            <option value="{{kur $n}}">{{$n.Point}}</option>
+        {{end}}
+    {{end}}
+</select>
+</div>
+<br>
+<div class="w3-card">
+    <div class="w3-container w3-indigo w3-center">
+        <h2>Total Tabungan</h2>
+    </div>
+    <div class="w3-container w3-center w3-light-blue">
+        <h3>{{rp .TotalTabungan}}</h3>
+    </div>
+    <div class="w3-container w3-indigo w3-center">
+        <h3>Total Pemasukan</h3>
+    </div>
+    <div class="w3-container w3-center w3-light-blue">
+        <h4 id="pemasukan-tiap-bulan">{{rp .PemasukanBulanIni}}</h4>
+    </div>
+</div>
+<br>
+<div class="w3-card" id="pemasukan-content">
+    <table class="w3-table w3-striped">
+        <w3-table>
+            <tr>
+                <th>Nomor</th>
+                <th>Item Pemasukan</th>
+                <th>Jumlah</th>
+                <th></th>
+            </tr>
+            {{with .DaftarPemasukan}}
+                {{range $m, $n := .}}
+                    <tr>
+                        <td>{{inc $m}}</td>
+                        <td>{{$n.NamaItem}}</td>
+                        <td class="w3-right-align">{{rpi $n.Pemasukan}}</td>
+                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deleteIncomeBut.call(this)">Hapus</button></td>
+                    </tr>
+                {{end}}
+            {{end}}
+        </w3-table>
+    </table>
+</div>

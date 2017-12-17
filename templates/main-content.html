@@ -1,0 +1,25 @@
+<div class="w3-card-4">
+    <div class="w3-container w3-pale-green w3-center">
+        <h2>Balance</h2>
+    </div>
+
+    <div class="w3-container w3-center">
+        <h3 id="balance-sisa">{{rp .MaksPengeluaran}}</h3>
+        <input type="number" name="" id="balance-hidden" value="{{.MaksPengeluaran}}" hidden>
+    </div>
+</div>
+<br>
+
+<div class="w3-card-4">
+    <div class="w3-container w3-pale-green w3-center">
+        <h2>Input</h2>
+    </div>
+    <form action="" method="post" class="w3-container w3-padding-large">
+        <label for="">Nama</label>
+        <input type="text" name="nama" id="input-nama" class="w3-input w3-border w3-round">
+        <label for="">Jumlah</label>
+        <input type="number" name="jumlah" id="input-jumlah" class="w3-input w3-border w3-round"><br>
+        <button class="w3-button w3-round w3-light-blue w3-hover-aqua" id="but-pemasukan">Pemasukan</button>
+        <button class="w3-button w3-round w3-light-blue w3-hover-aqua" id="but-pengeluaran">Pengeluaran</button>
+    </form>
+</div>
