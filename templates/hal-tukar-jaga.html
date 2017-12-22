@@ -1,0 +1,62 @@
+<div class="w3-card">
+    <header class="w3-container w3-teal w3-center">
+        <h1>Tukar Jaga</h1>
+    </header>
+
+    <!-- <div class="w3-container w3-padding w3-light-blue">
+        <div class="w3-container">
+            <select name="piutang" id="pilih-piutang" class="w3-select" onchange="getJenisPiutang.call(this)">
+                <option value="" disabled selected>Pilih jenis piutang...</option>
+                <option value="1">Jaga</option>
+                <option value="2">Uang</option>
+            </select>
+        </div>
+    <br> -->
+    <br>
+        <div class="w3-container">
+            <div class="w3-row " id="pilihan-piutang">
+                <h3>Ganti Jaga</h3>
+                <div class="w3-col s4" id="nama-penghutang">
+                    <input type="text" name="" id="nama-penukar" class="w3-input w3-round form-tukar-jaga" placeholder="Nama Penukar">
+                </div>
+                <div class="w3-col s4 little-left-padding">
+                    <select name="" id="jenis-hutang-jaga" class="w3-select w3-round form-tukar-jaga">
+                        <option value="1">Pagi</option>
+                        <option value="2">Sore</option>
+                        <option value="3">Malam</option>
+                    </select>
+                    <!-- <input type="text" name="" id="jenis-jaga" class="w3-input w3-round" placeholder="Jenis Hutang Jaga"> -->
+                </div>
+                <div class="w3-col s4 little-left-padding" id="tanggal-piutang">
+                    <input type="date" name="" id="tanggal-hutang-jaga" class="w3-input w3-round form-tukar-jaga" placeholder="Tanggal Hutang Jaga">
+                </div>
+            </div>
+            <br>
+            <h3>Bayar Ganti Jaga</h3>
+            <div class="w3-row">
+                <div class="w3-col s4">
+                        <select name="" id="jenis-bayar-jaga" class="w3-select w3-round form-tukar-jaga">
+                                <option value="1">Pagi</option>
+                                <option value="2">Sore</option>
+                                <option value="3">Malam</option>
+                            </select>
+                </div>
+                <div class="w3-col s4 little-left-padding">
+                    <input type="date" name="" id="tanggal-bayar-jaga" class="w3-input w3-round form-tukar-jaga" placeholder="Tanggal Bayar Jaga">
+                </div>
+                <div class="w3-col s4 w3-left-align little-left-padding" id="tombol-submit-piutang"><button type="submit" class="w3-button w3-round w3-small" id="submit-piutang" onclick="tambahTukarJaga()">Tambah</button></div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<br>
+<div class="w3-card">
+    <header class="w3-container w3-teal w3-center" >
+        <h1 id="header-list-tukar-jaga" onclick="refreshTukarJaga()">Daftar Tukar Jaga</h1>
+    </header>
+    <div class="w3-container">
+        <div class="w3-row" id="daftar-tukar-jaga"></div>
+    </div>
+    <button id="refresh-list-tukar-jaga" onclick="refreshListTukarJaga()" style="display:none"></button>
+</div>

@@ -1,1 +1,46 @@
 <h3>This is Hutang</h3>
+
+<div class="w3-card">
+    <header class="w3-container w3-teal w3-center">
+        <h1>Hutang</h1>
+    </header>
+
+    <div class="w3-container w3-padding w3-light-blue">
+        <!-- <div class="w3-container">
+            <select name="piutang" id="pilih-piutang" class="w3-select" onchange="getJenisPiutang.call(this)">
+                <option value="" disabled selected>Pilih jenis piutang...</option>
+                <option value="1">Jaga</option>
+                <option value="2">Uang</option>
+            </select>
+        </div>
+    <br> -->
+        <div class="w3-container">
+            <div class="w3-row " id="pilihan-piutang">
+                <div class="w3-col s3" id="nama">
+                    <input type="text" name="" id="nama-penghutang" class="w3-input w3-round" placeholder="Nama Penghutang">
+                </div>
+                <div class="w3-col s3" id="tanggal-piutang">
+                    <input type="text" name="" id="jenis-hutang" class="w3-input w3-round" placeholder="Jenis hutang">
+                </div>
+                <div class="w3-col s3" id="jumlah-piutang">
+                    <input type="number" name="" id="jumlah" class="w3-input w3-round" placeholder="Jumlah">
+                </div>
+                <div class="w3-col s3 w3-left-align" id="tombol-submit-piutang"><button type="submit" class="w3-button w3-round w3-small" id="submit-hutang" onclick="tambahHutang()">Tambah</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="w3-card">
+    <header class="w3-container w3-teal w3-center">
+        <h1>Daftar Hutang</h1>
+    </header>
+    <div class="w3-container" id="daftar-nama">
+        <select name="" id="select-daftar-nama" class="w3-select" onchange="getListHutang.call(this)">
+            <option value="">Nama Penghutang</option>
+        </select>
+    </div>
+    <div class="w3-container">
+        <div class="w3-row" id="daftar-hutang"></div>
+    </div>
+</div>

@@ -9,9 +9,8 @@
 </div>
 <br>
 <div class="w3-card">
-    <table class="w3-table w3-striped">
-        <w3-table>
-            <tr>
+    <table class="w3-table-all">
+            <tr class="w3-blue">
                 <th>Nomor</th>
                 <th>Nama Item</th>
                 <th>Jumlah</th>
@@ -23,11 +22,10 @@
                         <td>{{inc $m}}</td>
                         <td>{{$n.NamaItem}}</td>
                         <td class="w3-right-align">{{rpi $n.Pengeluaran}}</td>
-                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deletePemasukanBut.call(this)">Hapus</button></td>
+                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deletePengeluaranBut.call(this)">Hapus</button></td>
                     </tr>
                 {{end}}
             {{end}}
-        </w3-table>
     </table>
 </div>
 {{end}}
@@ -42,9 +40,8 @@
 </div>
 <br>
 <div class="w3-card">
-    <table class="w3-table w3-striped">
-        <w3-table>
-            <tr>
+    <table class="w3-table-all">
+            <tr class="w3-blue">
                 <th>Nomor</th>
                 <th>Nama Item</th>
                 <th>Jumlah</th>
@@ -56,11 +53,10 @@
                         <td>{{inc $m}}</td>
                         <td>{{$n.NamaItem}}</td>
                         <td class="w3-right-align">{{rpi $n.Pengeluaran}}</td>
-                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deletePemasukanBut.call(this)">Hapus</button></td>
+                        <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deletePengeluaranBut.call(this)">Hapus</button></td>
                     </tr>
                 {{end}}
             {{end}}
-        </w3-table>
     </table>
 </div>
 

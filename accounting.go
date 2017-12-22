@@ -24,7 +24,7 @@ func init() {
 	http.HandleFunc("/pengeluaran-refresh", pagePengeluaranRefresh)
 	http.HandleFunc("/pemasukan", pagePemasukan)
 	http.HandleFunc("/hutang", pageHutang)
-	http.HandleFunc("/piutang", pagePiutang)
+	http.HandleFunc("/tukar-jaga", pageTukarJaga)
 	http.HandleFunc("/pengaturan", pagePengaturan)
 	http.HandleFunc("/add-pengeluaran", addPengeluaran)
 	http.HandleFunc("/add-pemasukan", addPemasukan)
@@ -35,49 +35,92 @@ func init() {
 	http.HandleFunc("/delete-pengeluaran", deletePengeluaran)
 	http.HandleFunc("/get-pemasukan-bulan", getPemasukanBulan)
 	http.HandleFunc("/delete-pemasukan", deletePemasukan)
+	// http.HandleFunc("/tambah-piutang", tambahPiutang)
+	// http.HandleFunc("/get-piutang", getPiutang)
+	// http.HandleFunc("/tambah-hutang", tambahHutang)
+	http.HandleFunc("/tambah-tukar-jaga", TambahTukarJaga)
+	http.HandleFunc("/get-tukar-jaga", getTukarJaga)
 }
 
+// func tambahHutang(w http.ResponseWriter, r *http.Request) {
+// 	ctx := appengine.NewContext(r)
+// 	dat := &CatchDataJson{}
+// 	err := json.NewDecoder(r.Body).Decode(dat)
+// 	if err != nil {
+// 		ErrorRec(ctx, "Gagal mengambil dat dari klien", err)
+// 		return
+// 	}
+// 	defer r.Body.Close()
+// 	// log.Infof(ctx, "isi data adaah: %v", dat)
+
+// }
+// func getPiutang(w http.ResponseWriter, r *http.Request) {
+// 	ctx := appengine.NewContext(r)
+// 	q := datastore.NewQuery("Piutang").Filter("Status >", 0)
+// 	list := []Piutang{}
+// 	_, err := q.GetAll(ctx, &list)
+// 	if err != nil {
+// 		ErrorRec(ctx, "gagal mengambil data", err)
+// 		SendBackError(w, "gagal mengambil data", 500)
+// 		return
+// 	}
+
+// 	// for {
+// 	// 	pi := &Piutang{}
+// 	// 	_, err := t.Next(pi)
+// 	// 	if err == datastore.Done {
+// 	// 		break
+// 	// 	}
+// 	// 	list = append(list, *pi)
+// 	// }
+// 	// log.Infof(ctx, "List adaalh: %v", list)
+// 	w.WriteHeader(200)
+// 	fmt.Fprint(w, GenTemplate(ctx, list, "hal-piutang-tabel"))
+// }
+// func tambahPiutang(w http.ResponseWriter, r *http.Request) {
+// 	ctx := appengine.NewContext(r)
+// 	piu := &CatchPiutang{}
+// 	json.NewDecoder(r.Body).Decode(piu)
+// 	defer r.Body.Close()
+// 	log.Infof(ctx, "jumlah adalah: %v", piu.Jumlah)
+// 	k := datastore.NewIncompleteKey(ctx, "Piutang", nil)
+// 	inp := &Piutang{
+// 		TanggalInput: timeNowIndonesia(),
+// 		NamaJenis:    piu.Nama,
+// 		// "0" = Lunas, "1" = Belum lunas, "2" = Lunas sebagian
+// 		Status: 1,
+// 		Link:   k.Encode(),
+// 	}
+// 	if piu.Tanggal != "" {
+// 		inp.TanggalPiutang = ChangeStringtoTime(piu.Tanggal)
+// 		// log.Infof(ctx, "Tanggal adalah: %v", inp.TanggalPiutang)
+// 	}
+// 	if piu.Tanggal == "" {
+// 		jml, _ := strconv.Atoi(piu.Jumlah)
+// 		inp.Jumlah = jml
+// 	}
+
+// 	_, err := datastore.Put(ctx, k, inp)
+// 	if err != nil {
+// 		ErrorRec(ctx, "Gagal menyimpan piutang", err)
+// 		SendBackError(w, "Gagal Menyimpan Piutang", 500)
+// 	}
+// 	SendBackSuccess(w, nil, "", "", "")
+// }
 func deletePemasukan(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "text/html; charset=utf-8")
 	ctx := appengine.NewContext(r)
 	in := &Input{}
 	json.NewDecoder(r.Body).Decode(in)
 	r.Body.Close()
-	if in.NamaItem == "" {
-		k, _ := datastore.DecodeKey(in.Link)
-		err := datastore.Delete(ctx, k)
-		if err != nil {
-			w.WriteHeader(500)
-			fmt.Fprint(w, "Kesalahan di server, gagal membaca key")
-			return
-		} else {
-			w.WriteHeader(200)
-			pg := resumePemasukan(ctx, getMonthly(ctx, "", ""))
-			res := &ResponseJson{
-				Script:         GenTemplate(ctx, pg.DaftarPemasukan, "hal-pemasukan-content"),
-				ScriptTambahan: RupiahString(pg.PemasukanBulanIni),
-			}
-			json.NewEncoder(w).Encode(res)
-		}
-	} else {
-		k, _ := datastore.DecodeKey(in.Link)
-		err := datastore.Delete(ctx, k)
-		if err != nil {
-			w.WriteHeader(500)
-			fmt.Fprint(w, "Kesalahan di server, gagal membaca key")
-			return
-		} else {
-			w.WriteHeader(200)
-			kur := &Kursor{}
-			json.Unmarshal([]byte(in.NamaItem), kur)
-			pg := resumePemasukan(ctx, getMonthly(ctx, kur.Link, kur.Point))
-			res := &ResponseJson{
-				Script:         GenTemplate(ctx, pg.DaftarPemasukan, "hal-pemasukan-content"),
-				ScriptTambahan: RupiahString(pg.PemasukanBulanIni),
-			}
-			json.NewEncoder(w).Encode(res)
-		}
+	k, _ := datastore.DecodeKey(in.Link)
+	err := datastore.Delete(ctx, k)
+	if err != nil {
+		w.WriteHeader(500)
+		fmt.Fprint(w, "Kesalahan di server, gagal menghapus data")
+		return
 	}
+	SendBackSuccess(w, nil, "Berhasil menghapus data", "", "")
 }
 func getPemasukanBulan(w http.ResponseWriter, r *http.Request) {
 	ctx := appengine.NewContext(r)
@@ -108,9 +151,9 @@ func deletePengeluaran(w http.ResponseWriter, r *http.Request) {
 	in := &Input{}
 	json.NewDecoder(r.Body).Decode(in)
 	defer r.Body.Close()
-	log.Infof(ctx, "Link adalah: %v", in.Link)
+	// log.Infof(ctx, "Link adalah: %v", in.Link)
 	key, _ := datastore.DecodeKey(in.Link)
-	log.Infof(ctx, "Key adalah: %v", key)
+	// log.Infof(ctx, "Key adalah: %v", key)
 	err := datastore.Delete(ctx, key)
 	if err != nil {
 		ErrorRec(ctx, "Gagal menghapus entry", err)
@@ -541,10 +584,10 @@ func pageHutang(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, page)
 }
 
-func pagePiutang(w http.ResponseWriter, r *http.Request) {
+func pageTukarJaga(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-type", "text/html; charset=utf-8")
 	ctx := appengine.NewContext(r)
-	page := GenTemplate(ctx, nil, "hal-piutang")
+	page := GenTemplate(ctx, nil, "hal-tukar-jaga")
 	fmt.Fprint(w, page)
 }
 func pagePengaturan(w http.ResponseWriter, r *http.Request) {
@@ -615,6 +658,24 @@ func GenTemplate(c context.Context, n interface{}, temp ...string) string {
 			js, _ := json.Marshal(kur)
 			return string(js)
 		},
+		"strtgl": func(t time.Time) string {
+			return t.Format("Mon, 02/01/2006")
+		},
+		"istimezero": func(t time.Time) bool {
+			return t.IsZero()
+		},
+		"convstrjaga": func(j string) string {
+			var m string
+			switch j {
+			case "1":
+				m = "Pagi"
+			case "2":
+				m = "Sore"
+			case "3":
+				m = "Malam"
+			}
+			return m
+		},
 	}
 
 	tmpl := template.New("")
@@ -658,4 +719,25 @@ func RupiahString(i int) string {
 	}
 	m := fmt.Sprint(ac.FormatMoney(i))
 	return m
+}
+
+func ChangeStringtoTime(tgl string) time.Time {
+	str, _ := time.ParseInLocation("2006-1-02", tgl, ZonaIndo())
+	return str
+}
+
+func SendBackError(w http.ResponseWriter, t string, n int) {
+	w.WriteHeader(n)
+	fmt.Fprint(w, t)
+}
+
+func SendBackSuccess(w http.ResponseWriter, dat interface{}, script, modal, tambahan string) {
+	w.WriteHeader(200)
+	res := &ResponseJson{
+		Data:           dat,
+		Script:         script,
+		ModalScript:    modal,
+		ScriptTambahan: tambahan,
+	}
+	json.NewEncoder(w).Encode(res)
 }

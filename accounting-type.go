@@ -56,3 +56,23 @@ type ResumePerbulan struct {
 	TotalPengeluaran int       `json:"totalpeng"`
 	TotalPemasukan   int       `json:"totalpem"`
 }
+
+type TukarJaga struct {
+	TanggalInput      time.Time `json:"tglinput"`
+	Nama              string    `json:"nama"`
+	JagaHutang        string    `json:"jagahutang"`
+	TanggalJagaHutang time.Time `json:"tgljagahutang"`
+	JagaBayar         string    `json:"jagabayar"`
+	TanggalJagaBayar  time.Time `json:"tgljagabayar"`
+	Link              string    `json:"link"`
+	Status            string    `json:"status"`
+}
+
+type CatchDataJson struct {
+	Data1 string `json:"data01"`
+	Data2 string `json:"data02"`
+	Data3 string `json:"data03"`
+	Data4 string `json:"data04"`
+	Data5 string `json:"data05"`
+	Data6 string `json:"data06"`
+}

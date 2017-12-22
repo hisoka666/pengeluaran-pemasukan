@@ -125,8 +125,9 @@ function pageHutang(){
     servePage("/hutang", "main-content")
 }
 
-function pagePiutang(){
-    servePage("/piutang", "main-content")
+function pageTukarJaga(){
+    servePage("/tukar-jaga", "main-content")
+    servePage("/get-tukar-jaga", "daftar-tukar-jaga")
 }
 
 function pagePengaturan(){

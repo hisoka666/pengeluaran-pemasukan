@@ -1,0 +1,46 @@
+<div class="w3-col s6 w3-padding" id="daftar-piutang-jaga">
+        <h1 class="w3-center">Daftar Piutang Jaga</h1>
+        <div class="w3-responsive">
+            <table class="w3-table-all">
+                <tr class="w3-blue">
+                    <th>No</th>
+                    <th>Nama - Jaga</th>
+                    <th>Tanggal</th>
+                    <th></th>
+                </tr>
+                {{range $m, $n := .}}
+                    {{if eq $n.Jumlah 0}}
+                        <tr>
+                            <td>{{inc $m}}</td>
+                            <td>{{$n.NamaJenis}}</td>
+                            <td>{{strtgl $n.TanggalPiutang}}</td>
+                            <td><button type="submit" id="hapus-piutang">Hapus</button></td>
+                        </tr>
+                    {{end}}
+                {{end}}
+            </table>
+        </div>
+    </div>
+    <div class="w3-col s6 w3-padding" id="daftar-piutang-uang">
+        <h1 class="w3-center">Daftar Piutang Uang</h1>
+        <div class="w3-responsive">
+            <table class="w3-table-all">
+                <tr class="w3-blue">
+                    <th>No</th>
+                    <th>Nama - Hutang</th>
+                    <th>Jumlah</th>
+                    <th></th>
+                </tr>
+                {{range $m, $n := .}}
+                    {{if ne $n.Jumlah 0}}
+                        <tr>
+                            <td>{{inc $m}}</td>
+                            <td>{{$n.NamaJenis}}</td>
+                            <td>{{rp $n.Jumlah}}</td>
+                            <td><button type="submit" id="hapus-piutang">Hapus</button></td>
+                        </tr>
+                    {{end}}
+                {{end}}
+            </table>
+        </div>
+    </div>

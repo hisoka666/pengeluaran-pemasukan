@@ -1,7 +1,7 @@
 <!-- <h3>This is pemasukan</h3> -->
 <div class="w3-card">
 <select name="bulan" id="pemasukan-bulan" class="w3-select" onchange="getPemasukanBulan()">
-    <option class="disabled selected" value="">Pilih Bulan...</option>
+    <option class="selected" value="">Bulan Ini</option>
     {{with .DaftarKursor}}
         {{range $m, $n := .}}
             <option value="{{kur $n}}">{{$n.Point}}</option>
@@ -26,9 +26,8 @@
 </div>
 <br>
 <div class="w3-card" id="pemasukan-content">
-    <table class="w3-table w3-striped">
-        <w3-table>
-            <tr>
+    <table class="w3-table-all">
+            <tr class="w3-blue">
                 <th>Nomor</th>
                 <th>Item Pemasukan</th>
                 <th>Jumlah</th>
@@ -44,6 +43,5 @@
                     </tr>
                 {{end}}
             {{end}}
-        </w3-table>
     </table>
 </div>

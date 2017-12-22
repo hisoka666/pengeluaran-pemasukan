@@ -28,3 +28,17 @@
 body {
   background-color: #80deea;
 }
+
+/* #tanggal-piutang {
+  padding-left: 5px
+}
+#jumlah-piutang {
+  padding-left: 5px
+}
+#tombol-submit-piutang {
+  padding-left: 5px;
+  padding-top: 5px;
+} */
+.little-left-padding {
+  padding-left: 10px;
+}
