@@ -13,19 +13,23 @@
                 <td>{{$n.Nama}}</td>
                 <td>{{convstrjaga $n.JagaHutang}} - {{strtgl $n.TanggalJagaHutang}}</td>
                 {{if istimezero $n.TanggalJagaBayar}}
-                    <td>Tanggal bayar belum ditentukan</td>
+                    <td><input type="date" name="" id="tambah-tanggal-bayar-jaga" data-link="{{$n.Link}}" placeholder="Tanggal bayar jaga..." onselect="ubahTanggalBayarJaga.call(this)"></td>
                 {{else}}
                     <td>{{convstrjaga $n.JagaBayar}} - {{strtgl $n.TanggalJagaBayar}}</td>
                 {{end}}
                 <td>
-                    <select name="" id="status" class="w3-select w3-round w3-light-blue" data-link={{$n.Link}}>
-                        <option value="1">Lunas</option>
-                        <option value="2">Lunas Sebagian</option>
+                    
                         {{if istimezero $n.TanggalJagaBayar}}
-                            <option value="3">Tambah Tanggal Bayar</option>
+                            <button class="w3-button" type="submit" id="hapus-hutang-jaga" data-link={{$n.Link}} onclick="preHapusDataTukarJaga.call(this)">Hapus</button>
+                            <!-- <option value="3">Tambah Tanggal Bayar</option> -->
+                        {{else}}
+                        <select name="" id="status-data-jaga" class="w3-select w3-round w3-light-blue" data-link={{$n.Link}} onchange="editDataJaga.call(this)">
+                            <option value="" selected disabled>Pilih status...</option>
+                            <option value="1">Lunas</option>
+                            <option value="2">Lunas Sebagian</option>
+                            <option value="3">Ubah Tanggal Bayar</option>
+                        </select>
                         {{end}}
-                        <option value="3">Ubah Tanggal Bayar</option>
-                    </select>
                 </td>
                 <!-- <td><button type="submit" id="hapus-tukar-jaga" data-link={{$n.Link}}>Hapus</button></td> -->
             </tr>
