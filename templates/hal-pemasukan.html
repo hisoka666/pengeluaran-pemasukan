@@ -28,7 +28,8 @@
 <div class="w3-card" id="pemasukan-content">
     <table class="w3-table-all">
             <tr class="w3-blue">
-                <th>Nomor</th>
+                <th>No</th>
+                <th>Tanggal</th>
                 <th>Item Pemasukan</th>
                 <th>Jumlah</th>
                 <th></th>
@@ -37,6 +38,7 @@
                 {{range $m, $n := .}}
                     <tr>
                         <td>{{inc $m}}</td>
+                        <td>{{strtgl $n.Tanggal}}</td>
                         <td>{{$n.NamaItem}}</td>
                         <td class="w3-right-align">{{rpi $n.Pemasukan}}</td>
                         <td><button class="w3-button w3-cyan" data-link="{{$n.Link}}" onclick="deleteIncomeBut.call(this)">Hapus</button></td>

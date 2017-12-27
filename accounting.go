@@ -490,6 +490,7 @@ func getListItem(c context.Context, q *datastore.Query, tgl time.Time) []Input {
 		if j.Tanggal.In(ZonaIndo()).Before(tgl) == true {
 			break
 		}
+		j.Tanggal = j.Tanggal.In(ZonaIndo())
 		j.Link = k.Encode()
 		peng = append(peng, *j)
 	}
