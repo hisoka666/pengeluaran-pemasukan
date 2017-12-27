@@ -45,7 +45,7 @@ func TambahTukarJaga(w http.ResponseWriter, r *http.Request) {
 		SendBackError(w, "Gagal mengambil list", 500)
 		return
 	}
-	list = append([]TukarJaga{*jag}, list...)
+	// list = append([]TukarJaga{*jag}, list...)
 	// q := datastore.NewQuery("TukarJaga").Order("-TanggalInput")
 	// list := []TukarJaga{}
 	// _, err = q.GetAll(ctx, &list)
@@ -75,7 +75,15 @@ func getListTukarJaga(c context.Context) ([]TukarJaga, error) {
 		if tu.Status == "4" {
 			continue
 		}
+		if !tu.TanggalJagaBayar.IsZero() {
+			tu.TanggalJagaBayar = tu.TanggalJagaBayar.In(ZonaIndo())
+		}
+		if !tu.TanggalJagaHutang.IsZero() {
+			tu.TanggalJagaHutang = tu.TanggalJagaHutang.In(ZonaIndo())
+		}
 		tu.Link = k.Encode()
+		tu.TanggalInput = tu.TanggalInput.In(ZonaIndo())
+
 		list = append(list, *tu)
 	}
 	// k, err := q.GetAll(c, &list)

@@ -11,6 +11,11 @@
             <tr>
                 <td>{{inc $m}}</td>
                 <td>{{$n.Nama}}</td>
+                <!-- {{if istimezero $n.TanggalJagaHutang}}
+                    <td><input type="date" name="" id="tambah-tanggal-hutang-jaga" data-link="{{$n.Link}}" placeholder="Tanggal bayar jaga..." onselect="ubahTanggalHutangJaga.call(this)"></td>
+                {{else}}
+                    <td>{{convstrjaga $n.JagaHutang}} - {{strtgl $n.TanggalJagaHutang}}</td>
+                {{end}} -->
                 <td>{{convstrjaga $n.JagaHutang}} - {{strtgl $n.TanggalJagaHutang}}</td>
                 {{if istimezero $n.TanggalJagaBayar}}
                     <td><input type="date" name="" id="tambah-tanggal-bayar-jaga" data-link="{{$n.Link}}" placeholder="Tanggal bayar jaga..." onselect="ubahTanggalBayarJaga.call(this)"></td>
