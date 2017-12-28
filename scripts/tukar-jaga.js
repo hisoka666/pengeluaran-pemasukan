@@ -12,16 +12,17 @@ function tambahTukarJaga(){
     document.getElementById("tanggal-hutang-jaga").value = ""
     document.getElementById("jenis-bayar-jaga").value = "1"
     document.getElementById("tanggal-bayar-jaga").value = ""
-    sendPost("/tambah-tukar-jaga", JSON.stringify(payload), updateTukarJaga)
+    sendPost("/tambah-tukar-jaga", JSON.stringify(payload), pageTukarJaga)
 }
 
 function updateTukarJaga(){
+    document.getElementById("hal-tukar-jaga").click()
     // document.getElementById("refresh-list-tukar-jaga").click()
-    var js = JSON.parse(document.getElementById("server-response").innerHTML)
+    // var js = JSON.parse(document.getElementById("server-response").innerHTML)
     // console.log("isi script adalah: " + js.script)
-    document.getElementById("daftar-tukar-jaga").innerHTML = js.script
-    document.getElementById("modal01-content").innerHTML = js.modal
-    document.getElementById("modal01").style.display = "block"
+    // document.getElementById("daftar-tukar-jaga").innerHTML = js.script
+    // document.getElementById("modal01-content").innerHTML = js.modal
+    // document.getElementById("modal01").style.display = "block"
 }
 // function refreshListTukarJaga(){
 //     // document.getElementById("header-list-tukar-jaga").click
@@ -66,10 +67,21 @@ function ubahTanggalBayar(){
     }
     document.getElementById("modal01-tombol-tambahan").style.display = "none"
     document.getElementById("modal01-content-02").innerHTML = ""
-    sendPost("/ubah-tanggal-bayar-jaga", JSON.stringify(payload), updateTukarJaga)
+    sendPost("/ubah-tanggal-bayar-jaga", JSON.stringify(payload), pageTukarJaga)
     // console.log("payload adalah : " + JSON.stringify(payload))
 }
 function preHapusDataTukarJaga(){
     var link = this.dataset.link
     console.log("Link adalah: " + link)
+}
+
+function tambahTanggalBayarJaga(){
+    // var link = this.dataset.link
+    var payload = {
+        "data01": this.dataset.link,
+        "data02": document.getElementById("tambah-jenis-bayar-jaga").value,
+        "data03": this.value
+    }
+    sendPost("/tambah-bayar-jaga", JSON.stringify(payload), pageTukarJaga)
+    // console.log("Payload adalah: " + JSON.stringify(payload))
 }

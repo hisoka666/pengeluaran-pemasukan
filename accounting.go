@@ -41,6 +41,7 @@ func init() {
 	http.HandleFunc("/tambah-tukar-jaga", TambahTukarJaga)
 	http.HandleFunc("/get-tukar-jaga", getTukarJaga)
 	http.HandleFunc("/ubah-tanggal-bayar-jaga", ubahTglBayarJaga)
+	http.HandleFunc("/tambah-bayar-jaga", tambahBayarJaga)
 }
 
 // func tambahHutang(w http.ResponseWriter, r *http.Request) {

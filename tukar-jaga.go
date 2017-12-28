@@ -155,3 +155,38 @@ func ubahTglBayarJaga(w http.ResponseWriter, r *http.Request) {
 	SendBackSuccess(w, nil, GenTemplate(ctx, list, "hal-tukar-jaga-content"), "Berhasil mengubah data", "")
 	// GenTemplate(ctx, list, "hal-tukar-jaga-content")
 }
+
+func tambahBayarJaga(w http.ResponseWriter, r *http.Request) {
+	ctx := appengine.NewContext(r)
+	js := &CatchDataJson{}
+	json.NewDecoder(r.Body).Decode(js)
+	defer r.Body.Close()
+	k, err := datastore.DecodeKey(js.Data1)
+	if err != nil {
+		ErrorRec(ctx, "Gagal memparse kunci", err)
+		SendBackError(w, "Gagal memparse kunci", 500)
+		return
+	}
+	tu := &TukarJaga{}
+	err = datastore.Get(ctx, k, tu)
+	if err != nil {
+		ErrorRec(ctx, "Gagal mengambil data", err)
+		SendBackError(w, "Gagal mengambil data", 500)
+		return
+	}
+	tu.JagaBayar = js.Data2
+	tu.TanggalJagaBayar = ChangeStringtoTime(js.Data3)
+	_, err = datastore.Put(ctx, k, tu)
+	if err != nil {
+		ErrorRec(ctx, "Gagal menyimpan data", err)
+		SendBackError(w, "Gagal menyimpan data", 500)
+		return
+	}
+	list, err := getListTukarJaga(ctx)
+	if err != nil {
+		SendBackError(w, "Gagal mengambil list data", 500)
+		ErrorRec(ctx, "Gagal mengambil list data", err)
+		return
+	}
+	SendBackSuccess(w, nil, GenTemplate(ctx, list, "hal-tukar-jaga-content"), "Berhasil menambah data bayar jaga", "")
+}
